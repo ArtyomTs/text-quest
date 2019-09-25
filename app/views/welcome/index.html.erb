@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <% @surveys.each do |survey| %>
+    <li class="list-group-item">
+      <%= survey.title %>
+      <a href="/" class="btn btn-success float-right">Play</a>
+    </li>
+  <% end %>
+</ul>
