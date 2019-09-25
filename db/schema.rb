@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_103531) do
+ActiveRecord::Schema.define(version: 2019_09_25_162301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 2019_09_25_103531) do
     t.index ["survey_id"], name: "index_frames_on_survey_id"
   end
 
+  create_table "options", force: :cascade do |t|
+    t.string "text"
+    t.string "code"
+    t.integer "weight"
+    t.bigint "frame_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["frame_id"], name: "index_options_on_frame_id"
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -50,5 +60,6 @@ ActiveRecord::Schema.define(version: 2019_09_25_103531) do
   end
 
   add_foreign_key "frames", "surveys"
+  add_foreign_key "options", "frames"
   add_foreign_key "surveys", "frames", column: "start_frame_id"
 end
