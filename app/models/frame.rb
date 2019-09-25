@@ -2,6 +2,6 @@ class Frame < ApplicationRecord
   belongs_to :survey
   has_many :options
 
-  validates :survey, :title, presence: true
-
+  validates :survey, :title, :code, presence: true
+  validates :code, uniqueness: { scope: :survey_id }
 end
