@@ -6,10 +6,21 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container-fluid">
+      <nav class="navbar fixed-top .navbar-dark bg-dark">
+        <a class="navbar-brand text-light" href="/">Text Quests</a>
+      </nav>
+      <div class="container" style="padding: 60px 0 60px 0;">
+        <%= yield %>
+      </div>
+      <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="navbar-brand" href="#">Artyom Tsaplin</a>
+      </nav>
+    </div>
   </body>
 </html>
