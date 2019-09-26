@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_201417) do
+ActiveRecord::Schema.define(version: 2019_09_25_205646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,17 @@ ActiveRecord::Schema.define(version: 2019_09_25_201417) do
     t.integer "start_frame_id"
   end
 
+  create_table "triggers", force: :cascade do |t|
+    t.string "type"
+    t.json "condition"
+    t.bigint "frame_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["frame_id"], name: "index_triggers_on_frame_id"
+  end
+
   add_foreign_key "frames", "surveys"
   add_foreign_key "options", "frames"
   add_foreign_key "surveys", "frames", column: "start_frame_id"
+  add_foreign_key "triggers", "frames"
 end
