@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_205646) do
+ActiveRecord::Schema.define(version: 2019_09_26_195432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 2019_09_25_205646) do
     t.index ["survey_id"], name: "index_frames_on_survey_id"
   end
 
+  create_table "game_sessions", force: :cascade do |t|
+    t.integer "answers", default: [], array: true
+    t.integer "check_point"
+    t.integer "total_weight"
+    t.bigint "frame_id"
+    t.bigint "survey_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["frame_id"], name: "index_game_sessions_on_frame_id"
+    t.index ["survey_id"], name: "index_game_sessions_on_survey_id"
+  end
+
   create_table "options", force: :cascade do |t|
     t.string "text"
     t.string "code"
@@ -70,6 +82,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_205646) do
   end
 
   add_foreign_key "frames", "surveys"
+  add_foreign_key "game_sessions", "frames"
+  add_foreign_key "game_sessions", "surveys"
   add_foreign_key "options", "frames"
   add_foreign_key "surveys", "frames", column: "start_frame_id"
   add_foreign_key "triggers", "frames"
