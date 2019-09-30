@@ -20,8 +20,10 @@ class DirectJumpTrigger < Trigger
   # }
 
   def get_next_frame(session)
-    #parse condition to get jump options
     #get last answer
+    option = session.find_last_answer
+    #parse condition to get jump options
+    conditions_hash[:jumps].detect{ |jump| jump[:option_code] == option.code }[:frame_code]
     #return code of next frame
   end
 

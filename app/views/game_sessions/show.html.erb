@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @survey.title %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= @frame.title %></h6>
+    <p class="card-text"><%= @frame.content %></p>
+    <% if @frame.final? %>
+      <%= link_to 'Start again', survey_play_path(@survey, choice: :restart), class: "card-link", method: :put %>
+      <%= link_to 'Quit', survey_play_path(@survey, choice: :quit), class: "card-link", method: :put %>
+      <% unless @frame.success? %>
+        <%= link_to 'Try another way', survey_play_path(@survey, choice: :rollback), class: "card-link", method: :put %>
+      <% end -%>
+    <% else %>
+      <%- @options.each do |option| %>
+        <%= link_to option.text, survey_play_path(@survey, chosen_option_id: option.id), class: "card-link", method: :put %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>

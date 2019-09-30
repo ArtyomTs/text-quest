@@ -1,8 +1,9 @@
 <ul class="list-group">
   <% @surveys.each do |survey| %>
     <li class="list-group-item">
-      <%= survey.title %>
-      <a href="/" class="btn btn-success float-right">Play</a>
+      <h3><%= survey.title %></h3>
+      <p><%= survey.description %></p>
+      <%= link_to "Play", survey_play_path(survey), class: "btn btn-success float-right", method: :post %>
     </li>
   <% end %>
 </ul>
