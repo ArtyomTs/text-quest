@@ -5,7 +5,7 @@
     <p class="card-text"><%= @frame.content %></p>
     <% if @frame.final? %>
       <%= link_to 'Start again', survey_play_path(@survey, choice: :restart), class: "card-link", method: :put %>
-      <%= link_to 'Quit', survey_play_path(@survey, choice: :quit), class: "card-link", method: :put %>
+      <%= link_to 'Quit', survey_play_path(@survey, choice: :quit), class: "card-link", method: :delete %>
       <% unless @frame.success? %>
         <%= link_to 'Try another way', survey_play_path(@survey, choice: :rollback), class: "card-link", method: :put %>
       <% end -%>

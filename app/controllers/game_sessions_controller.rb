@@ -1,5 +1,5 @@
 class GameSessionsController < ApplicationController
-  before_action :init_game, only: [:show, :update]
+  before_action :init_game, only: [:show, :update, :destroy]
   before_action :find_survey
 
   def create
@@ -15,17 +15,12 @@ class GameSessionsController < ApplicationController
   def update
     @game.update choice_params
 
-    #TODO move from controller
-    if @game.finished?
-      @game.destroy
-      redirect_to root_url
-    else
-      if @game.restarted?
-        @game.destroy
-        @game = get_game
-      end
-      redirect_to survey_play_url(@survey)
-    end
+    redirect_to survey_play_url(@survey)
+  end
+
+  def destroy
+    @game.destroy
+    redirect_to root_url
   end
 
   private

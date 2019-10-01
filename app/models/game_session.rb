@@ -16,27 +16,19 @@ class GameSession < ApplicationRecord
     case action
     when 'restart'
       self.restart
-    when 'quit'
-      self.quit
     when 'rollback'
       self.rollback
     end
   end
 
   def restart
-    @is_restarted = true
+    self.frame = self.survey.start_frame
+    self.answers = []
+    self.check_point = self.survey.start_frame.id
   end
 
   def quit
     @is_finished = true
-  end
-
-  def restarted?
-    !!@is_restarted
-  end
-
-  def finished?
-    !!@is_finished
   end
 
   def rollback
